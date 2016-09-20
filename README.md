@@ -1,0 +1,2 @@
+# upowaznienia
+system upowaznien
