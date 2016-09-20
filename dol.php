@@ -78,7 +78,14 @@
 
         //Date picker
         $('#datepicker').datepicker({
-            autoclose: true
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+
+
+        });
+        $('#datepicker2').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd'
         });
         //Timepicker
         $(".timepicker").timepicker({

@@ -33,20 +33,22 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
-                    <span>Nadgodziny</span>
+                    <span>Upoważnienia</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="nadgodziny.php?a=rejestracja"><i class="fa fa-circle-o"></i>Nowy wniosek</a></li>
-                    <li><a href="nadgodziny.php"><i class="fa fa-circle-o"></i> Przegląd</a></li>
+                    <li><a href="upowaznienia.php?a=rejestracja"><i class="fa fa-circle-o"></i>Nowy wniosek</a></li>
+                    <li><a href="upowaznienia.php"><i class="fa fa-circle-o"></i> Przegląd</a></li>
                     <?php
+                    /*
                     if($uzytkownik_funkcja>0 or $uzytkownik_uprawnienia==1)
                     {
                         echo '<li><a href="nadgodziny.php?a=przeglad_grupa"><i class="fa fa-circle-o"></i> Przegląd Grupy</a></li>';
                         echo '<li><a href="nadgodziny.php?a=przeglad_grupa_osoby"><i class="fa fa-circle-o"></i> Przegląd Grupy Osoby</a></li>';
                     }
+                    */
                     ?>
                 </ul>
             </li>

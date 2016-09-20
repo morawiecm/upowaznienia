@@ -179,3 +179,19 @@ function PobierzGrupeKierownika($id_uzytkownika)
     }
     return $id_grupy;
 }
+
+function PobierzNazweGrupy($id_grupy)
+{
+    $polaczenie= polaczenie_z_baza();
+    $nazwa_grupy='';
+    $pobierz_grupe=mysqli_query($polaczenie,"SELECT nazwa_grupy FROM uzytkownicy_grupy WHERE id='$id_grupy'")
+    or die("Bład przy pobierz_grupa Nazwa".mysqli_error($polaczenie));
+    if(mysqli_num_rows($pobierz_grupe)>0)
+    {
+        while ($dane=mysqli_fetch_array($pobierz_grupe))
+        {
+            $nazwa_grupy= $dane['nazwa_grupy'];
+        }
+    }
+    return $nazwa_grupy;
+}

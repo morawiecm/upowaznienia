@@ -94,7 +94,7 @@ include 'menu.php';
                 </div>
             </div>
             <div class="box-body">';
-                    if(isset($_POST[zapisz]))
+                    if(isset($_POST['zapisz']))
                     {
                     //wartosci bledow
                     $kontrola_bledow=0;
@@ -109,14 +109,14 @@ include 'menu.php';
                     $blad_wydzial=0;
 
 
-                        if($_POST[login]=='')
+                        if($_POST['login']=='')
                         {
                             $kontrola_bledow++;
                             $blad_login++;
                         }
-                        if($_POST[login]!='')
+                        if($_POST['login']!='')
                         {
-                            $login=clear($_POST[login]);
+                            $login=clear($_POST['login']);
                             $sprawdz_login=mysqli_query($polaczenie,"SELECT user_name FROM users WHERE user_name='$login'") or die(mysqli_error($polaczenie));
                             if(mysqli_num_rows($sprawdz_login)>0)
                             {
@@ -124,40 +124,40 @@ include 'menu.php';
                                 $blad_login_duplikat++;
                             }
                         }
-                        if($_POST[haslo1]=='' || $_POST[haslo2]=='')
+                        if($_POST['haslo1']=='' || $_POST['haslo2']=='')
                         {
                             $kontrola_bledow++;
                             $blad_haslo_puste++;
                         }
-                        if($_POST[haslo1]!='' && $_POST[haslo2]!='')
+                        if($_POST['haslo1']!='' && $_POST[haslo2]!='')
                         {
-                            if($_POST[haslo1] != $_POST[haslo2])
+                            if($_POST['haslo1'] != $_POST['haslo2'])
                             {
                                 $kontrola_bledow++;
                                 $blad_haslo++;
                             }
                         }
-                        if($_POST[imie]=='')
+                        if($_POST['imie']=='')
                         {
                             $kontrola_bledow++;
                             $blad_imie++;
                         }
-                        if($_POST[nazwisko]=='')
+                        if($_POST['nazwisko']=='')
                         {
                             $kontrola_bledow++;
                             $blad_nazwisko++;
                         }
-                        if($_POST[email]=='')
+                        if($_POST['email']=='')
                         {
                             $kontrola_bledow++;
                             $blad_email++;
                         }
-                        if($_POST[jednostka]=='')
+                        if($_POST['jednostka']=='')
                         {
                             $kontrola_bledow++;
                             $blad_jednostka++;
                         }
-                        if($_POST[wydzial]=='')
+                        if($_POST['wydzial']=='')
                         {
                             $kontrola_bledow++;
                             $blad_wydzial++;
@@ -223,15 +223,15 @@ include 'menu.php';
                         }
                         else
                         {
-                            $login=clear($_POST[login]);
-                            $haslo=clear($_POST[haslo1]);
-                            $email=clear($_POST[email]);
+                            $login=clear($_POST['login']);
+                            $haslo=clear($_POST['haslo1']);
+                            $email=clear($_POST['email']);
                             $imie=clear($_POST[imie]);
-                            $nazwisko=clear($_POST[nazwisko]);
-                            $jednostka=clear($_POST[jednostka]);
-                            $wydzial=clear($_POST[wydzial]);
-                            $sekcja=clear($_POST[sekcja]);
-                            $specjalne=clear($_POST[specjalne]);
+                            $nazwisko=clear($_POST['nazwisko']);
+                            $jednostka=clear($_POST['jednostka']);
+                            $wydzial=clear($_POST['wydzial']);
+                            $sekcja=clear($_POST['sekcja']);
+                            $specjalne=clear($_POST['specjalne']);
                             $data=time();
 
                             $haslo=codepass($haslo);
