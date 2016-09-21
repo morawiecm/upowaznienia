@@ -13,12 +13,12 @@ function pobierz_sekcje()
 {
     $polaczenie=polaczenie_z_baza();
     $lista='';
-    $pobierzJednostki=mysqli_query($polaczenie,"SELECT nazwa_grupy FROM uzytkownicy_grupy");
+    $pobierzJednostki=mysqli_query($polaczenie,"SELECT id, nazwa_grupy FROM uzytkownicy_grupy");
     if(mysqli_num_rows($pobierzJednostki)>0)
     {
         while ($jednostka=mysqli_fetch_array($pobierzJednostki))
         {
-            $lista.="<option>$jednostka[nazwa_grupy]</option>";
+            $lista.="<option value='$jednostka[id]'>$jednostka[nazwa_grupy]</option>";
         }
     }
     else
@@ -61,8 +61,7 @@ function wyswietl_pelniona_funkcje_lista($id_uzytkownika)
             $lista.="<option value='$funkcja'>$pelniona_funkcja_aktualna</option>";
             $lista.="<option value='0'>Użytkownik</option>";
             $lista.="<option value='1'>Kierownik</option>";
-            $lista.="<option value='2'>Kordynator</option>";
-            $lista.="<option value='3'>Naczelnik</option>";
+
         }
     }
 
@@ -192,6 +191,10 @@ function PobierzNazweGrupy($id_grupy)
         {
             $nazwa_grupy= $dane['nazwa_grupy'];
         }
+    }
+    else
+    {
+        $nazwa_grupy = 'Nie przypisano użytkownikowi grupy';
     }
     return $nazwa_grupy;
 }

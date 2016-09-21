@@ -1,5 +1,7 @@
 <?php
 include 'config.php';
+include './funkcje/funkcje_uzytkownicy.php';
+include './funkcje/funkcje_wniosek.php';
 check_login();
 // dane uzytkownika z sesji
 $user_data = get_user_data();
@@ -9,9 +11,11 @@ $uzytkownik_nazwa = $user_data['user_name'];
 $uzytkownik_id = $user_data['user_id'];
 $uzytkownik_wydzial = $user_data['wydzial'];
 $uzytkownik_sekcja = $user_data['sekcja'];
+$uzytkownik_grupa=$user_data['grupa'];
 $uzytkownik_uprawnienia = $user_data['specialne'];
 $uzytkownik_funkcja=$user_data['funkcja'];
 $użytkownik_imie_nazwisko = $uzytkownik_imie . " " . $uzytkownik_nazwisko;
+$nazwa_grupy = PobierzNazweGrupy($uzytkownik_grupa);
 //dane z POST
 //
 
@@ -49,14 +53,9 @@ include 'menu.php';
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Blank page
-            <small>it all starts here</small>
+            Witaj!
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
-            <li class="active">Blank page</li>
-        </ol>
+
     </section>
 
     <!-- Main content -->
@@ -65,7 +64,7 @@ include 'menu.php';
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Title</h3>
+                <h3 class="box-title">Sytem Upoważnień do danych osobowych. Nadawanie uprawnień - Arkadiusz Hatłas tel 79 110 75 </h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -75,12 +74,9 @@ include 'menu.php';
                 </div>
             </div>
             <div class="box-body">
-                Start creating your amazing application!
             </div>
             <!-- /.box-body -->
-            <div class="box-footer">
-                Footer
-            </div>
+
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->

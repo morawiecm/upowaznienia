@@ -6,14 +6,17 @@ check_login();
 
 // dane uzytkownika z sesji
 $user_data = get_user_data();
-$uzytkownik_imie=$user_data['imie'];
-$uzytkownik_nazwisko=$user_data['nazwisko'];
-$uzytkownik_nazwa=$user_data['user_name'];
-$uzytkownik_id=$user_data['user_id'];
+$uzytkownik_imie = $user_data['imie'];
+$uzytkownik_nazwisko = $user_data['nazwisko'];
+$uzytkownik_nazwa = $user_data['user_name'];
+$uzytkownik_id = $user_data['user_id'];
 $uzytkownik_wydzial = $user_data['wydzial'];
 $uzytkownik_sekcja = $user_data['sekcja'];
-$uzytkownik_uprawnienia=$user_data['specialne'];
-$użytkownik_imie_nazwisko=$uzytkownik_imie." ".$uzytkownik_nazwisko;
+$uzytkownik_grupa = $user_data['grupa'];
+$uzytkownik_uprawnienia = $user_data['specialne'];
+$uzytkownik_funkcja=$user_data['funkcja'];
+$użytkownik_imie_nazwisko = $uzytkownik_imie . " " . $uzytkownik_nazwisko;
+$nazwa_grupy = PobierzNazweGrupy($uzytkownik_grupa);
 //dane z POST
 
 
@@ -71,7 +74,9 @@ include 'menu.php';
                     <tr><th>Email:</th><td><input type='email' class='form-control' name='email'></td></tr>
                     <tr><th>Jednostka</th><td><input type='text' name='jednostka' class='form-control'></td></tr>
                     <tr><th>Wydzial</th><td><input type='text' name='wydzial' class='form-control'></td></tr>
-                    <tr><th>Sekcja</th><td><input type='text' name='sekcja' class='form-control'></td></tr>
+                    <tr><th>Grupa uprawnien</th><td><select name='sekcja' class='form-control'>";
+                    echo pobierz_sekcje();
+                    echo "</select></td></tr>
                     <tr><th>Specjalne</th><th><input type='number' name='specjalne' class='form-control'></th></tr>
                     <tr><td colspan='2'><input type='submit' name='zapisz' value='Dodaj użytkownika' class='btn btn-success form-control'></td></tr>
                     </form></table>";
@@ -238,7 +243,7 @@ include 'menu.php';
 
 
 
-                            $zapisz_uzytkownikaDoBazy=mysqli_query($polaczenie,"INSERT INTO users (user_id, user_name, user_password, user_email, user_regdate, wydzial, uprawienia, specialne, imie, nazwisko, sekcja)
+                            $zapisz_uzytkownikaDoBazy=mysqli_query($polaczenie,"INSERT INTO users (user_id, user_name, user_password, user_email, user_regdate, wydzial, uprawienia, specialne, imie, nazwisko, grupa)
                             VALUES ('','$login', '$haslo','$email', '$data', '$wydzial','$specjalne','$specjalne','$imie','$nazwisko','$sekcja')") or die("blad przy zapisz_uzytkownikaDoBazy".mysqli_error($polaczenie));
                             echo "Utworzono konto dla użytkownika: $login  <a href='uzytkownicy.php' class='btn btn-success'>Powrót</a>";
 
@@ -262,7 +267,7 @@ include 'menu.php';
                     if($uzytkownik_uprawnienia==1)
                     {
                         $blad_imie=0;
-                        $pobierz_daneUzytkownika=mysqli_query($polaczenie,"SELECT imie, nazwisko, user_email, sekcja, specialne, wydzial, user_name, funkcja, typ_osoby, aktywny FROM users WHERE user_id='$nrID'") or die("Blad przy pobierz_daneUzytkownika".mysqli_error($polaczenie));
+                        $pobierz_daneUzytkownika=mysqli_query($polaczenie,"SELECT imie, nazwisko, user_email, sekcja, specialne, wydzial, user_name, funkcja, typ_osoby, aktywny, grupa FROM users WHERE user_id='$nrID'") or die("Blad przy pobierz_daneUzytkownika".mysqli_error($polaczenie));
                         if(mysqli_num_rows($pobierz_daneUzytkownika)==1)
                         {
                             while($daneUzytkownika=mysqli_fetch_array($pobierz_daneUzytkownika))
@@ -303,8 +308,9 @@ include 'menu.php';
                         if($blad_wydzial>0){
                             echo "<p class='text-red'>Nie podano wydziału !</p>";
                         }
+                        $nazwa_grupy_lista = PobierzNazweGrupy($daneUzytkownika['grupa']);
                         echo "</td></tr>
-                    <tr><th>Sekcja</th><td><select name='sekcja' class='form-control'><option value='$daneUzytkownika[sekcja]'>$daneUzytkownika[sekcja]</option>";
+                    <tr><th>Grupa uprawnień</th><td><select name='grupa' class='form-control'><option value='$daneUzytkownika[grupa]'>$nazwa_grupy_lista</option>";
                                 echo pobierz_sekcje();
                                 echo"</select></td></tr>
                     <tr><th>Specjalne</th><th><input type='number' name='specjalne' class='form-control' value='$daneUzytkownika[specialne]'></th></tr>
@@ -386,12 +392,12 @@ include 'menu.php';
                 if(isset($_POST['id_usera']))
                 {
                     $id_usera=$_POST['id_usera'];
-                    $nr_grupy = $_POST['sekcja'];
-                    $grupa=sprawdz_nr_grupy($nr_grupy);
+                    $nr_grupy = $_POST['grupa'];
+
 
 
                     $aktualizacja_uzytkownika=mysqli_query($polaczenie,"UPDATE users SET imie='$_POST[imie]', nazwisko='$_POST[nazwisko]', 
-                    user_email='$_POST[email]', sekcja='$_POST[sekcja]', grupa = '$grupa', specialne='$_POST[specjalne]', wydzial='$_POST[wydzial]', 
+                    user_email='$_POST[email]', grupa = '$nr_grupy', specialne='$_POST[specjalne]', wydzial='$_POST[wydzial]', 
                     funkcja='$_POST[funkcja]', typ_osoby='$_POST[typ_osoby]' WHERE user_id='$id_usera'")
                         or die("Blad przy aktualizacja_uzytkownika".mysqli_error($polaczenie));
 
@@ -448,7 +454,7 @@ include 'menu.php';
                 $pobierz_listeUzytkownikow = mysqli_query($polaczenie,"SELECT user_id, user_name, imie, nazwisko, logowanie_ip, user_email, wydzial, ip_a, aktywny FROM `users`");
                 */
                 $pobierz_listaUzytkownikow=mysqli_query($polaczenie,"SELECT user_id, user_name, imie, nazwisko, logowanie_ip, logowanie_data,
-                 user_email, wydzial, aktywny FROM `users`") or die("Blad przy pobierz_listaUzytkownikow".mysqli_error($polaczenie));
+                 user_email, wydzial, aktywny, grupa FROM `users`") or die("Blad przy pobierz_listaUzytkownikow".mysqli_error($polaczenie));
                 $licznik_listaUzytkownikow=mysqli_num_rows($pobierz_listaUzytkownikow);
                 ?>
                 <p><a href="uzytkownicy.php?a=dodaj_nowego" class="btn btn-info">Dodaj Nowego Użytkownika</a> </p>
@@ -457,6 +463,8 @@ include 'menu.php';
                     <tr>
                         <th>Imię i Nazwisko</th>
                         <th>Login / ID</th>
+                        <th>Grupa</th>
+                        <th>Wydział</th>
                         <th>Email</th>
                         <th>Data logowania</th>
                         <th>Adres IP</th>
@@ -476,7 +484,10 @@ include 'menu.php';
                             echo"<tr><td></span>$listaUzytkownikow[imie] $listaUzytkownikow[nazwisko]";
                             echo "</td>";
                         }
+                        $grupa_nazwa = PobierzNazweGrupy($listaUzytkownikow['grupa']);
                         echo"<td>$listaUzytkownikow[user_name] ($listaUzytkownikow[user_id])</td>
+                        <td>$grupa_nazwa</td>
+                        <td>$listaUzytkownikow[wydzial]</td>
                         <td>$listaUzytkownikow[user_email]</td>
                         <td>$listaUzytkownikow[logowanie_data]</td>
                         <td>$listaUzytkownikow[logowanie_ip]</td>

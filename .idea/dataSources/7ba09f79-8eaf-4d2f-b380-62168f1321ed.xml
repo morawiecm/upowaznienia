@@ -7,232 +7,235 @@
     <schema id="2" name="baza_nowa"/>
     <schema id="3" name="bramka"/>
     <schema id="4" name="information_schema"/>
-    <schema id="5" name="ksiazka"/>
-    <schema id="6" name="mysql"/>
-    <schema id="7" name="performance_schema"/>
-    <schema id="8" name="phpmyadmin"/>
-    <schema id="9" name="test"/>
-    <schema id="10" name="kwp"/>
-    <schema id="11" name="laravel"/>
-    <table id="12" parent="1" name="backup"/>
-    <table id="13" parent="1" name="lista_zmian"/>
-    <table id="14" parent="1" name="users"/>
-    <table id="15" parent="1" name="ustawienia"/>
-    <table id="16" parent="1" name="uzytkownicy_grupy"/>
-    <table id="17" parent="1" name="ewidencja_upowaznienia"/>
-    <column id="18" parent="12" name="id">
+    <schema id="5" name="kaciatech"/>
+    <schema id="6" name="ksiazka"/>
+    <schema id="7" name="mysql"/>
+    <schema id="8" name="performance_schema"/>
+    <schema id="9" name="phpmyadmin"/>
+    <schema id="10" name="poczta"/>
+    <schema id="11" name="robol"/>
+    <schema id="12" name="serwis_nowy"/>
+    <schema id="13" name="test"/>
+    <schema id="14" name="umowy"/>
+    <table id="15" parent="1" name="backup"/>
+    <table id="16" parent="1" name="lista_zmian"/>
+    <table id="17" parent="1" name="users"/>
+    <table id="18" parent="1" name="ustawienia"/>
+    <table id="19" parent="1" name="uzytkownicy_grupy"/>
+    <table id="20" parent="1" name="ewidencja_upowaznienia"/>
+    <column id="21" parent="15" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="19" parent="12" name="dataBackupu">
+    <column id="22" parent="15" name="dataBackupu">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
     </column>
-    <column id="20" parent="12" name="nazwaBackupu">
+    <column id="23" parent="15" name="nazwaBackupu">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="21" parent="12" name="ktoUtworzyl">
+    <column id="24" parent="15" name="ktoUtworzyl">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <key id="22" parent="12" name="PRIMARY">
+    <key id="25" parent="15" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="23" parent="13" name="id">
+    <column id="26" parent="16" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="24" parent="13" name="data">
+    <column id="27" parent="16" name="data">
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="25" parent="13" name="opis">
+    <column id="28" parent="16" name="opis">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="26" parent="13" name="top">
+    <column id="29" parent="16" name="top">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <key id="27" parent="13" name="PRIMARY">
+    <key id="30" parent="16" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="28" parent="14" name="user_id">
+    <column id="31" parent="17" name="user_id">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="29" parent="14" name="user_name">
+    <column id="32" parent="17" name="user_name">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="30" parent="14" name="user_password">
+    <column id="33" parent="17" name="user_password">
       <mandatory>1</mandatory>
       <data-type>varchar(40)|0</data-type>
     </column>
-    <column id="31" parent="14" name="grupa">
+    <column id="34" parent="17" name="grupa">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="32" parent="14" name="imie">
+    <column id="35" parent="17" name="imie">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="33" parent="14" name="typ_osoby">
+    <column id="36" parent="17" name="typ_osoby">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="34" parent="14" name="nazwisko">
+    <column id="37" parent="17" name="nazwisko">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="35" parent="14" name="user_email">
+    <column id="38" parent="17" name="user_email">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="36" parent="14" name="wydzial">
+    <column id="39" parent="17" name="wydzial">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="37" parent="14" name="sekcja">
+    <column id="40" parent="17" name="sekcja">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="38" parent="14" name="pomieszczenie">
+    <column id="41" parent="17" name="pomieszczenie">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="39" parent="14" name="logowanie_data">
+    <column id="42" parent="17" name="logowanie_data">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="40" parent="14" name="uprawienia">
+    <column id="43" parent="17" name="uprawienia">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="41" parent="14" name="specialne">
+    <column id="44" parent="17" name="specialne">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="42" parent="14" name="logowanie_ip">
+    <column id="45" parent="17" name="logowanie_ip">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="43" parent="14" name="funkcja">
+    <column id="46" parent="17" name="funkcja">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="44" parent="14" name="user_regdate">
+    <column id="47" parent="17" name="user_regdate">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
     </column>
-    <column id="45" parent="14" name="data_ustania_uprawnien">
+    <column id="48" parent="17" name="data_ustania_uprawnien">
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="46" parent="14" name="data_zmiany_hasla">
+    <column id="49" parent="17" name="data_zmiany_hasla">
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="47" parent="14" name="data_niepoprawnego_logowania">
+    <column id="50" parent="17" name="data_niepoprawnego_logowania">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
     </column>
-    <column id="48" parent="14" name="liczba_niepoprawnych_logowan">
+    <column id="51" parent="17" name="liczba_niepoprawnych_logowan">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="49" parent="14" name="aktywny">
+    <column id="52" parent="17" name="aktywny">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="50" parent="14" name="reset_hasla">
+    <column id="53" parent="17" name="reset_hasla">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <key id="51" parent="14" name="PRIMARY">
+    <key id="54" parent="17" name="PRIMARY">
       <columns>user_id</columns>
       <primary>1</primary>
     </key>
-    <column id="52" parent="15" name="id">
+    <column id="55" parent="18" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="53" parent="15" name="tresc">
+    <column id="56" parent="18" name="tresc">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="54" parent="15" name="funkcja">
+    <column id="57" parent="18" name="funkcja">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <key id="55" parent="15" name="PRIMARY">
+    <key id="58" parent="18" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="56" parent="16" name="id">
+    <column id="59" parent="19" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="57" parent="16" name="nazwa_grupy">
+    <column id="60" parent="19" name="nazwa_grupy">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="58" parent="16" name="id_kierownika">
+    <column id="61" parent="19" name="id_kierownika">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <key id="59" parent="16" name="PRIMARY">
+    <key id="62" parent="19" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="60" parent="17" name="id">
+    <column id="63" parent="20" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="61" parent="17" name="id_usera_rejestracja">
+    <column id="64" parent="20" name="id_usera_rejestracja">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="62" parent="17" name="data_rejestracji">
+    <column id="65" parent="20" name="data_rejestracji">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
     </column>
-    <column id="63" parent="17" name="nr_kadrowy">
+    <column id="66" parent="20" name="nr_kadrowy">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="64" parent="17" name="imie_nazwisko">
+    <column id="67" parent="20" name="imie_nazwisko">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="65" parent="17" name="nr_upowaznienia">
+    <column id="68" parent="20" name="nr_upowaznienia">
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="66" parent="17" name="typ_wniosku">
+    <column id="69" parent="20" name="typ_wniosku">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="67" parent="17" name="data_nadania">
+    <column id="70" parent="20" name="data_nadania">
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="68" parent="17" name="data_ustania">
+    <column id="71" parent="20" name="data_ustania">
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="69" parent="17" name="kto_edytowal">
+    <column id="72" parent="20" name="kto_edytowal">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <key id="70" parent="17" name="PRIMARY">
+    <key id="73" parent="20" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>

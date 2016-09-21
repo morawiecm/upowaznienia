@@ -193,9 +193,9 @@ include 'menu.php';
                         $zapisz_wniosek=mysqli_query($polaczenie,"INSERT INTO ewidencja_upowaznienia (id_usera_rejestracja, data_rejestracji, nr_kadrowy, imie_nazwisko, nr_upowaznienia, typ_wniosku, data_nadania, data_ustania)
                         VALUES ('$uzytkownik_id','$data_wniosku','$wniosek_nr_kadrowy','$wniosek_imie_nazwisko','$wniosek_nr_caly','$wniosek_typ_osoby','$wniosek_data_nadania','$wniosek_data_ustania')")
                             or die("Bład przy zapisz_wniosek: ".mysqli_error($polacznie));
-
+                        $nr_rekordu_ostaniego=mysqli_insert_id($polaczenie);
                         echo "<p> Zapisano pomyslnie.<a href='upowaznienia.php'>POWRÓT</a> lub 
-                        <a href='genreuj_wniosek.php'>Generuj wniosek do druku dla $wniosek_imie_nazwisko</a> </p>";
+                        <a href='genreuj_wniosek.php?id=$nr_rekordu_ostaniego'>Generuj wniosek do druku dla $wniosek_imie_nazwisko</a> </p>";
                         ZwiekszNrWniosku($wniosek_nr_wniosku);
                     }
                 }
@@ -255,9 +255,10 @@ include 'menu.php';
                 else
                 {
                     echo "<p>Przegląd wnosków wedle uprawnień dla grupy: $nazwa_grupy</p>";
+                    echo "<a href='eksport.php' class='btn btn-success'>Eksportuj do Excela</a>";
                     if($uzytkownik_grupa=='1')
                     {
-                        echo "<a href='eksport.php' class='btn btn-success'>Eksportuj do Excela</a>";
+
                         $wyswietl_ewidencje=mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, nr_upowaznienia, data_nadania, data_ustania,id FROM ewidencja_upowaznienia ORDER BY data_nadania DESC");
                     }
                     elseif ($uzytkownik_grupa=='2')

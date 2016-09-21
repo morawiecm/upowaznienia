@@ -1,19 +1,23 @@
 <?php
 include 'config.php';
 include 'funkcje/funkcje_uzytkownicy.php';
-include 'funkcje/funkcje_nadgodziny.php';
+
 
 check_login();
 
 // dane uzytkownika z sesji
 $user_data = get_user_data();
-$uzytkownik_imie=$user_data['imie'];
-$uzytkownik_nazwisko=$user_data['nazwisko'];
-$uzytkownik_nazwa=$user_data['user_name'];
-$uzytkownik_id=$user_data['user_id'];
-$uzytkownik_sekcja=$user_data['sekcja'];
-$uzytkownik_uprawnienia=$user_data['specialne'];
-$użytkownik_imie_nazwisko=$uzytkownik_imie." ".$uzytkownik_nazwisko;
+$uzytkownik_imie = $user_data['imie'];
+$uzytkownik_nazwisko = $user_data['nazwisko'];
+$uzytkownik_nazwa = $user_data['user_name'];
+$uzytkownik_id = $user_data['user_id'];
+$uzytkownik_wydzial = $user_data['wydzial'];
+$uzytkownik_sekcja = $user_data['sekcja'];
+$uzytkownik_grupa = $user_data['grupa'];
+$uzytkownik_uprawnienia = $user_data['specialne'];
+$uzytkownik_funkcja=$user_data['funkcja'];
+$użytkownik_imie_nazwisko = $uzytkownik_imie . " " . $uzytkownik_nazwisko;
+$nazwa_grupy = PobierzNazweGrupy($uzytkownik_grupa);
 //dane z POST
 
 
@@ -150,14 +154,13 @@ include 'menu.php';
                     $pobierz_uzytkownikowGrupy=mysqli_query($polaczenie,"SELECT users.imie, users.nazwisko, users.user_id FROM users WHERE users.grupa='$nrID' ORDER BY users.imie") or die("blad przy pobierz_uzytkownikowGrupy".mysqli_error($polaczenie));
                     if(mysqli_num_rows($pobierz_uzytkownikowGrupy)>0)
                     {
-                        echo"<tr><th>LP</th><th>Imie i Nazwisko</th><th>Nadgodziny/Niedogodziny</th><th>Akcja</th></tr>";
+                        echo"<tr><th>LP</th><th>Imie i Nazwisko</th></tr>";
                         $lp=0;
                         while ($uzytkownicyGrupy=mysqli_fetch_array($pobierz_uzytkownikowGrupy))
                         {
                             $lp++;
-                            $minuty = PoliczMinuty($uzytkownicyGrupy['user_id']);
-                            echo"<tr><td>$lp</td><td>$uzytkownicyGrupy[imie] $uzytkownicyGrupy[nazwisko]</td><td>$minuty minut</td><td><a href='nadgodziny.php?a=przeglad&id=$uzytkownicyGrupy[user_id]' class='btn-sm btn-danger'>
-                            Pokaż ewidencje godzin</a> </td></tr>";
+
+                            echo"<tr><td>$lp</td><td>$uzytkownicyGrupy[imie] $uzytkownicyGrupy[nazwisko]</td></tr>";
                         }
                         echo"</table>";
                     }
@@ -258,15 +261,17 @@ include 'menu.php';
                 }
                 else{
 
-                    echo "<p><a href='uzytkownicy_grupa.php?a=dodaj_grupe' class='btn btn-success'>Dodaj Grupę</a> </p>";
+                    //echo "<p><a href='uzytkownicy_grupa.php?a=dodaj_grupe' class='btn btn-success'>Dodaj Grupę</a> </p>";
                     $pobierz_Grupy = mysqli_query($polaczenie, "SELECT uzytkownicy_grupy.id, uzytkownicy_grupy.nazwa_grupy, uzytkownicy_grupy.id_kierownika, users.imie, users.nazwisko FROM uzytkownicy_grupy INNER JOIN users ON uzytkownicy_grupy.id_kierownika=users.user_id") or die("Blad przy pobierz_Grupy" . mysqli_error($polaczenie));
                     if (mysqli_num_rows($pobierz_Grupy) > 0) {
                         $lp = 0;
                         echo "<table class='table table-striped'>";
-                        echo "<tr><th>LP</th><th>Nazwa Grupy</th><th>Kierownik Grupy</th><th>Akcja</th></tr>";
+                        echo "<tr><th>LP</th><th>Nazwa Grupy</th><th>Zarządzjący Grupą</th><th>Akcja</th></tr>";
                         while ($grupa = mysqli_fetch_array($pobierz_Grupy)) {
                             $lp++;
-                            echo "<tr><td>$lp</td><td>$grupa[1]</td><td>$grupa[3] $grupa[4]</td><td><a href='uzytkownicy_grupa.php?a=pokaz_grupe&id=$grupa[0]' class='btn-sm btn-info'>POKAŻ</a><a href='uzytkownicy_grupa.php?a=zmien_kierownika&id=$grupa[0]' class='btn-sm btn-primary'>Zmień kierownika</a><a href='uzytkownicy_grupa.php?a=usun&id=$grupa[0]' class='btn-sm btn-danger'>USUŃ</a> </td></tr>";
+                            echo "<tr><td>$lp</td><td>$grupa[1]</td><td>$grupa[3] $grupa[4]</td><td><a href='uzytkownicy_grupa.php?a=pokaz_grupe&id=$grupa[0]' class='btn-sm btn-info'>POKAŻ</a><a href='uzytkownicy_grupa.php?a=zmien_kierownika&id=$grupa[0]' class='btn-sm btn-primary'>Zmień zarządzającego</a>";
+                            //echo "<a href='uzytkownicy_grupa.php?a=usun&id=$grupa[0]' class='btn-sm btn-danger'>USUŃ</a>
+                            echo"</td></tr>";
                         }
                         echo "</table>";
 

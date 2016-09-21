@@ -16,7 +16,7 @@ if(isset($nrID))
         while ($dane_do_protokolu=mysqli_fetch_array($pobierz_dane_do_protokolu))
         {
             $protokol_imie_nazwisko = iconv('utf-8','windows-1250',$dane_do_protokolu['imie_nazwisko']);
-            $protokol_nr_kadrowy = $dane_do_protokolu['nr_kadrowy'];
+            $protokol_nr_kadrowy = iconv('utf-8','windows-1250',$dane_do_protokolu['nr_kadrowy']);
             $protokol_nr_upowaznienia = $dane_do_protokolu['nr_upowaznienia'];
             $protokol_data_nadania = $dane_do_protokolu['data_nadania'];
         }
