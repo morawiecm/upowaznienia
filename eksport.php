@@ -24,7 +24,7 @@ echo "<tr></tr>";
 echo "<thead><tr><th colspan='6'>EWIDENCJA</th></tr>";
 echo "<tr><th colspan='6'>osób upoważnionych do przetwarzania danych osobowych</th></tr>";
 echo "<tr><th colspan='6'>w Komendzie Wojewódzkiej Policji w Gorzowie Wlkp.</th></tr>";
-echo "<tr><th>Nr ID kadrowy*</th><th>Nazwisko i imię</th><th>Nr** upoważnienia</th><th>zakres *** upoważnienia</th><th>Data nadania</th><th>Data ustania</th></tr></thead>";
+echo "<tr><th>Nr ID kadrowy*</th><th>Nazwisko i imię</th><th>Nr upoważnienia</th><th>zakres ** upoważnienia</th><th>Data nadania</th><th>Data ustania</th></tr></thead>";
 if($uzytkownik_grupa =='1')
 {
     $pobierzDaneDoZestawienia=mysqli_query($polaczenie," SELECT nr_kadrowy,imie_nazwisko,nr_upowaznienia,data_nadania,data_ustania FROM ewidencja_upowaznienia");
@@ -47,8 +47,7 @@ if(mysqli_num_rows($pobierzDaneDoZestawienia)>0)
 }
 echo"<tr></tr>";
 echo "<tr><td colspan='6'>* w przypadku braku ID kadrowego wpisujemy np. staż, praktyka</td></tr>";
-echo "<tr><td colspan='6'>** kolejny numer / rok nadania np 123/16</td></tr>";
-echo "<tr><td colspan='6'>*** zgodny z kartą opisu stanowska pracy i zakresem obowiązków</td></tr>";
+echo "<tr><td colspan='6'>** zgodny z kartą opisu stanowska pracy i zakresem obowiązków</td></tr>";
 echo"</table>";
 
 

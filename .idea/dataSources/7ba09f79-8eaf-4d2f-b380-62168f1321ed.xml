@@ -235,7 +235,15 @@
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <key id="73" parent="20" name="PRIMARY">
+    <column id="73" parent="20" name="data_szkolenia">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="74" parent="20" name="data_edycji">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="75" parent="20" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>

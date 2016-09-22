@@ -34,13 +34,13 @@ if(isset($nrID))
 
     $pdf->Ln(24);
     $pdf->Cell(123);
-    $pdf->Cell(80,0,$protokol_nr_upowaznienia,0,0,'L');
+    $pdf->Cell(55,0,$protokol_nr_upowaznienia,0,0,'C');
     $pdf->Ln(85);
     $pdf->Cell(10);
-    $pdf->Cell(120,0,$protokol_imie_nazwisko.", (". $protokol_nr_kadrowy.")",0,0,'L');
+    $pdf->Cell(170,0,$protokol_imie_nazwisko." (". $protokol_nr_kadrowy.")",0,0,'C');
     $pdf->SetFont('arial_ce','B',12);
     $pdf->Ln(31.5);
-    $pdf->Cell(27);
+    $pdf->Cell(24);
     $pdf->Cell(40,0,$protokol_data_nadania,0,0,'L');
     $pdf->Close();
     $pdf->Output();

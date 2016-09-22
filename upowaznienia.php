@@ -142,14 +142,24 @@ include 'menu.php';
                 }
                 elseif($uzytkownik_grupa=='3')
                 {
+
                     echo"<table class='table table-striped table-bordered'><form method='post' action='upowaznienia.php?a=zapisz_wniosek'>";
                     echo "<tr>";
                     echo "<th>Typ Osoby:</th>";
-                    echo "<td><select name='typ_osoby' class='form-control'>
-                                    <option value='2'>Cywil</option>
-                                    <option value='3'>Praktykant, stażysta</option>
-                                    </select>
-                              </td>";
+
+                    echo "<td><select name='typ_osoby' class='form-control'>";
+                                if($nrID=='1')
+                                {
+                                    echo"<option value='2' selected>Cywil</option>
+                                    <option value='3'>Praktykant, stażysta</option>";
+                                }
+                                elseif ($nrID=='2')
+                                {
+                                    echo "<option value='2'>Cywil</option>
+                                    <option value='3' selected>Praktykant, stażysta</option>";
+                                }
+
+                    echo "</select></td>";
                     echo "</tr>";
                     echo "<tr>";
                     echo "<th>Nr kadrowy</th>";
@@ -212,17 +222,19 @@ include 'menu.php';
                 {
                     if (isset($nrID))
                     {
-                        $pobierz_wpis = mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, data_nadania, data_ustania, typ_wniosku FROM ewidencja_upowaznienia WHERE id  = '$nrID'")
+                        $pobierz_wpis = mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, data_nadania, data_ustania, typ_wniosku, data_szkolenia, nr_upowaznienia, kto_edytowal, data_edycji FROM ewidencja_upowaznienia WHERE id  = '$nrID'")
                             or die("Bład przy pobierz_wpis".mysqli_error($polaczenie));
                         if(mysqli_num_rows($pobierz_wpis)>0)
                         {
                             while ($wpis=mysqli_fetch_array($pobierz_wpis))
                             {
+                                $nazwa_grupy_wnioske = PobierzNazweGrupy($wpis['typ_wniosku']);
                                 echo"<table class='table table-striped table-bordered'><form method='post' action='upowaznienia.php?a=aktualizuj_wniosek'>";
+                                echo "<tr><th>Nr upowaznienia: </th><td><input type='text' value='$wpis[nr_upowaznienia]'  class='form-control' disabled></td></tr>";
                                 echo "<tr>";
                                 echo "<th>Typ Osoby:</th>";
                                 echo "<td><select name='typ_osoby' class='form-control'>";
-                                echo "<option value='$wpis[typ_wniosku]'></option>";
+                                echo "<option value='$wpis[typ_wniosku]'>$nazwa_grupy_wnioske</option>";
                                 echo"<option value='1'>Policjant</option>
                                     <option value='2'>Cywil</option>
                                     <option value='3'>Praktykant, stażysta</option>
@@ -245,11 +257,37 @@ include 'menu.php';
                                 echo "<th>Data ustania</th>";
                                 echo "<td><input type='text' class='form-control' name='data_ustania' id='datepicker2' value='$wpis[data_ustania]'></td>";
                                 echo "</tr>";
+                                echo "<tr><th>Data szkolenia:</th><td><input type='text' name='data_szkolenia' class='form-control' id='datepicker3' value='$wpis[data_szkolenia]'></td></tr>";
                                 echo "<tr><th colspan='2'><input type='hidden' name='nr_id' value='$nrID'><input type='submit' value='Aktualizuj upoważnienie' class='btn btn-warning form-control' name='przycisk_aktualizuj_wnioske'></th></tr>";
                                 echo"</form></table>";
+                                if($wpis['kto_edytowal']!='0')
+                                {
+                                    $kto_edytowal = PobierzImieNazwisko($wpis['kto_edytowal']);
+                                    echo "<p>Edytował ostatnio: $kto_edytowal Data: {$wpis['data_edycji']}</p>";
+                                }
                             }
                         }
 
+                    }
+                }
+                elseif ($a=='aktualizuj_wniosek')
+                {
+                    if(isset($_POST['przycisk_aktualizuj_wnioske']))
+                    {
+                        $upo_typ = $_POST['typ_osoby'];
+                        $upo_nr_kadrowy = trim($_POST['nr_kadrowy']);
+                        $upo_imie_nazwisko = trim($_POST['imie_nazwisko']);
+                        $upo_data_nadania = $_POST['data_nadania'];
+                        $upo_data_ustania = $_POST['data_ustania'];
+                        $upo_data_szkolenia = $_POST['data_szkolenia'];
+                        $upo_nr_id_rek = $_POST['nr_id'];
+                        $upo_data_edycji = date("Y-m-d H:i:s");
+
+                        $aktualizujUpowaznienie = mysqli_query($polaczenie,"UPDATE ewidencja_upowaznienia SET typ_wniosku = '$upo_typ', 
+                        nr_kadrowy ='$upo_nr_kadrowy', imie_nazwisko = '$upo_imie_nazwisko', data_nadania = '$upo_data_nadania', data_ustania = '$upo_data_ustania', 
+                        data_szkolenia = '$upo_data_szkolenia', kto_edytowal = '$uzytkownik_id', data_edycji = '$upo_data_edycji' WHERE id = '$upo_nr_id_rek'")
+                            or die("Blad przy aktualizujUpowaznienie: ".mysqli_error($polaczenie));
+                        echo "<p>Zaktualizowano pomyslnie upoważnienie <a href='upowaznienia.php'>Powrót</a></p>";
                     }
                 }
                 else
@@ -259,7 +297,7 @@ include 'menu.php';
                     if($uzytkownik_grupa=='1')
                     {
 
-                        $wyswietl_ewidencje=mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, nr_upowaznienia, data_nadania, data_ustania,id FROM ewidencja_upowaznienia ORDER BY data_nadania DESC");
+                        $wyswietl_ewidencje=mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, nr_upowaznienia, data_nadania, data_ustania,id, data_szkolenia FROM ewidencja_upowaznienia ORDER BY data_nadania DESC");
                     }
                     elseif ($uzytkownik_grupa=='2')
                     {
@@ -277,12 +315,22 @@ include 'menu.php';
                     }
                     $data_dzis=date("Y-m-d");
                     echo "<table class='table table-striped table-bordered' id='example1'>";
-                    echo "<thead><tr><th>Nr Kadrowy</th><th>Imię i Nazwisko</th><th>Nr upowaznienia</th><th>Data nadania</th><th>Data ustania</th><th>AKCJA</th></tr></thead>";
+                    echo "<thead><tr><th>Nr Kadrowy</th><th>Imię i Nazwisko</th><th>Nr upowaznienia</th><th>Data nadania</th><th>Data ustania</th>";
+                    if($uzytkownik_grupa=='1')
+                    {
+                        echo "<th>Data Szkolenia</th>";
+                    }
+                    echo "<th>AKCJA</th></tr></thead>";
                     if(mysqli_num_rows($wyswietl_ewidencje)>0)
                     {
                         while ($ewidencja=mysqli_fetch_array($wyswietl_ewidencje))
                         {
-                            echo "<tr><td>$ewidencja[nr_kadrowy]</td><td>$ewidencja[imie_nazwisko]</td><td>$ewidencja[nr_upowaznienia]</td><td>$ewidencja[data_nadania]</td><td>$ewidencja[data_ustania]</td><td>
+                            echo "<tr><td>$ewidencja[nr_kadrowy]</td><td>$ewidencja[imie_nazwisko]</td><td>$ewidencja[nr_upowaznienia]</td><td>$ewidencja[data_nadania]</td><td>$ewidencja[data_ustania]</td>";
+                            if($uzytkownik_grupa=='1')
+                            {
+                                echo "<td>$ewidencja[data_szkolenia]</td>";
+                            }
+                            echo "<td>
                             <a href='genreuj_wniosek.php?id=$ewidencja[id]' class='btn-sm btn-primary'>PDF</a>
                             <a href='upowaznienia.php?a=edycja&id=$ewidencja[id]' class='btn-sm btn-info'>EDYCJA</a>";
                             if($uzytkownik_grupa=='1')
