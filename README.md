@@ -1,2 +1,2 @@
 # upowaznienia
-system upowaznien
+system upowaznien wersja finalna
