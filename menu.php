@@ -30,8 +30,8 @@
 
             echo'<li class="header">UPOWAŻNIENIA</li>
             <li><a href="upowaznienia.php?a=rejestracja"><i class="fa fa-circle-o"></i>Funkcjonariusze</a></li>
-            <li><a href="upowaznienia.php?a=rejestracja&id=1"><i class="fa fa-circle-o"></i>Cywile</a></li>
-            <li><a href="upowaznienia.php?a=rejestracja&id=2"><i class="fa fa-circle-o"></i>Praktykanci, staż, prac.int</a></li>
+            <li><a href="upowaznienia.php?a=rejestracja&id=1"><i class="fa fa-circle-o"></i>Pracownicy</a></li>
+            <li><a href="upowaznienia.php?a=rejestracja&id=2"><i class="fa fa-circle-o"></i>Praktyka, staż, itp.</a></li>
             <li><a href="upowaznienia.php"><i class="fa fa-circle-o"></i> Przegląd</a></li>';
 
                 echo '<li class="header">ADMINISTRACJA</li>

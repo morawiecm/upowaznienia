@@ -67,7 +67,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="profil.php" class="btn btn-default btn-flat">Profil</a>
+                                    <?php echo"<a href='profil.php?id=$uzytkownik_id' class='btn btn-default btn-flat'>Profil</a>"; ?>
                                 </div>
                                 <div class="pull-right">
                                     <a href="logout.php" class="btn btn-default btn-flat">Wyloguj</a>

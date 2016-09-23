@@ -9,6 +9,33 @@
  */
 
 
+function sprawdzHasloPolityka($text)
+{
+    $prawidlowe=true;
+    $ilosc_znakow=strlen($text);
+    $wielkich_znakow=similar_text($text,strtolower($text));
+    $wielkich_znakow_liczba=$ilosc_znakow-$wielkich_znakow;
+    $znaki_specjalne=preg_match('/[#@$%^&*()+=\-\[\]\';,.\/{}|":<>?~\\\\]/', $text);
+    if($ilosc_znakow<8)
+    {
+        $prawidlowe = false;
+    }
+    if($wielkich_znakow_liczba==0)
+    {
+        $prawidlowe = false;
+    }
+    if($znaki_specjalne== 0)
+    {
+        $prawidlowe = false;
+    }
+    return $prawidlowe;
+}
+
+function sprawdzCzyHasloSpelniaPolityke()
+{
+
+}
+
 function pobierz_sekcje()
 {
     $polaczenie=polaczenie_z_baza();

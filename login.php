@@ -23,7 +23,7 @@ if(!$_SESSION['logged']) {
        // $db = $polaczenie->polaczenie_z_baza;
         // sprawdzamy prostym zapytaniem sql czy podane dane są prawidłowe
        // $zapytanie = $db->query("SELECT `user_id` FROM `users` WHERE `user_name` = '{$_POST['name']}' AND `user_password` = '{$_POST['password']}' LIMIT 1");
-        $result = mysqli_query($polaczenie,"SELECT `user_id` FROM `users` WHERE `user_name` = '{$_POST['name']}' AND `user_password` = '{$_POST['password']}' LIMIT 1");
+        $result = mysqli_query($polaczenie,"SELECT `user_id`, `data_zmiany_hasla`, `user_password` FROM `users` WHERE `user_name` = '{$_POST['name']}' AND `user_password` = '{$_POST['password']}' LIMIT 1");
         //$wynik = $zapytanie->num_rows;
         /*if($wynik>0)
         {
@@ -43,9 +43,24 @@ if(!$_SESSION['logged']) {
             $user = $row['user_id'];
             $ip = $_SERVER['REMOTE_ADDR'];
 
-            $data_logowania = mysqli_query($polaczenie,"UPDATE `users` SET `user_website`='$data_godz', `ip_a`='$ip' WHERE `user_id`='$user'");
+            $data_logowania = mysqli_query($polaczenie,"UPDATE `users` SET `logowanie_data`='$data_godz', `logowanie_ip`='$ip' WHERE `user_id`='$user'");
             echo("$ip  $data_godz $user");
-            header('Location: index.php');
+            if($row['data_zmiany_hasla']=="0000-00-00" || $row['user_password']=='482de21110d50380a8a74cc86745dc884d9551c4')
+            {
+                if($user=='1')
+                {
+                    header('Location: index.php');
+                }
+                else
+                {
+                    header('Location: uzytkownicy.php?a=zmien_haslo');
+                }
+            }
+            else
+            {
+                header('Location: index.php');
+            }
+
         } else {
             $blad=1;
         }

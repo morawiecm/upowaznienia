@@ -64,7 +64,7 @@ include 'menu.php';
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Sytem Upoważnień do danych osobowych. Nadawanie uprawnień - Arkadiusz Hatłas tel 79 110 75 </h3>
+                <h3 class="box-title">Sytem Upoważnień do danych osobowych. Nadawanie uprawnień -Administrator Bezpieczeństwa Informacji tel 79 110 70 </h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
