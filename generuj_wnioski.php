@@ -7,9 +7,9 @@ include 'config.php';
  * Time: 12:41
  */
 
-if(isset($nrID))
-{
-    $pobierz_dane_do_protokolu=mysqli_query($polaczenie,"SELECT * FROM ewidencja_upowaznienia WHERE id = '$nrID'")
+include './fpdf17/code39.php';
+$pdf = new PDF_Code39();
+    $pobierz_dane_do_protokolu=mysqli_query($polaczenie,"SELECT * FROM ewidencja_upowaznienia")
     or die("Blad przy pobierz_dane_do_protokolu: ".mysqli_error($polaczenie));
     if(mysqli_num_rows($pobierz_dane_do_protokolu)>0)
     {
@@ -19,10 +19,8 @@ if(isset($nrID))
             $protokol_nr_kadrowy = iconv('utf-8','windows-1250',$dane_do_protokolu['nr_kadrowy']);
             $protokol_nr_upowaznienia = $dane_do_protokolu['nr_upowaznienia'];
             $protokol_data_nadania = $dane_do_protokolu['data_nadania'];
-        }
-    }
-    include './fpdf17/code39.php';
-    $pdf = new PDF_Code39();
+
+
     //$pdf->AliasNbPages();
     $pdf->AddPage('P','A4');
     $pdf->AddFont('arial_ce','','arial_ce.php');
@@ -43,10 +41,8 @@ if(isset($nrID))
     $pdf->Cell(14);
     //$pdf->Cell(10,0,'',1,1);
     $pdf->Cell(21,0,$protokol_data_nadania,0,0,'C');
-    $pdf->Close();
-    $pdf->Output();
-}
-else
-{
-    echo "Blad przy generowaniu wniosku. Brak ID!";
-}
+
+        }
+    }
+$pdf->Close();
+$pdf->Output();

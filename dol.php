@@ -44,14 +44,18 @@
 
 <script>
     $(function () {
-        $("#example1").DataTable();
+        $("#example1").DataTable
+        ({
+            "iDisplayLength": 100
+        });
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": false,
             "ordering": true,
             "info": true,
-            "autoWidth": false
+            "autoWidth": false,
+            "iDisplayLength": 100
         });
         $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
         $('#reservation').daterangepicker();
@@ -145,51 +149,7 @@
             console.log("New date range selected: ' + start.format('YYYY-MM-DD h:m') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
         });
 
-        $('#nadgodziny-do').daterangepicker({
-                "singleDatePicker": true,
-                "timePicker": true,
-                "timePicker24Hour": true,
-                "locale": {
-                    "format": "YYYY-MM-DD HH:mm",
-                    "separator": " - ",
-                    "applyLabel": "Zastosuj",
-                    "cancelLabel": "Anuluj",
-                    "fromLabel": "Od",
-                    "toLabel": "Do",
-                    "customRangeLabel": "Custom",
-                    "weekLabel": "W",
-                    "daysOfWeek": [
-                        "Nie",
-                        "Po",
-                        "Wt",
-                        "Śr",
-                        "Czw",
-                        "Pt",
-                        "Sob"
-                    ],
-                    "monthNames": [
-                        "Styczeń",
-                        "Luty",
-                        "Marzec",
-                        "Kwiecień",
-                        "Maj",
-                        "Czerwiec",
-                        "Lipiec",
-                        "Sierpień",
-                        "Wrzesień",
-                        "Październik",
-                        "Listopad",
-                        "Grudzień"
-                    ],
-                    "firstDay": 1
-                },
-                "startDate": new Date()
 
-            },
-
-            function(start, end, label) {
-                console.log("New date range selected: ' + start.format('YYYY-MM-DD h:m') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-            });
 
 
     });

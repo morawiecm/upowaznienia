@@ -86,11 +86,25 @@ include 'menu.php';
                     echo"<table class='table table-striped table-bordered'><form method='post' action='upowaznienia.php?a=zapisz_wniosek'>";
                     echo "<tr>";
                         echo "<th>Typ Osoby:</th>";
-                        echo "<td><select name='typ_osoby' class='form-control'>
-                                    <option value='1'>Policjant</option>
-                                    <option value='2'>Cywil</option>
-                                    <option value='3'>Praktykant, stażysta</option>
-                                    </select>
+                        echo "<td><select name='typ_osoby' class='form-control'>";
+                    if($nrID=='1')
+                    {
+                        echo"<option value='2' selected>Pracownik</option>
+                                    <option value='3'>Praktykant, stażysta</option>";
+                    }
+                    elseif ($nrID=='2')
+                    {
+                        echo "<option value='2'>Pracownik</option>
+                                    <option value='3' selected>Praktykant, stażysta</option>";
+                    }
+                    else{
+                    echo"<option value='1'>Funkcjonariusz</option>";
+                    }
+
+
+                                   // <option value='2'>Pracownik</option>
+                                  //  <option value='3'>Praktykant, stażysta</option>
+                                    echo"</select>
                               </td>";
                     echo "</tr>";
                     echo "<tr>";
@@ -107,7 +121,7 @@ include 'menu.php';
                     echo "</tr>";
                     echo "<tr>";
                     echo "<th>Data nadania</th>";
-                    echo "<td><input type='text' class='form-control' name='data_nadania' id='datepicker'></td>";
+                    echo "<td><input type='text' class='form-control' name='data_nadania' id='datepicker' value='2016-10-03'></td>";
                     echo "</tr>";
                     echo "<tr>";
                     echo "<th>Data ustania</th>";
@@ -122,7 +136,7 @@ include 'menu.php';
                     echo "<tr>";
                     echo "<th>Typ Osoby:</th>";
                     echo "<td><select name='typ_osoby' class='form-control'>
-                                    <option value='1'>Policjant</option>
+                                    <option value='1'>Funkcjonariusz</option>
                               </select></td>";
                     echo "</tr>";
                     echo "<tr>";
@@ -139,7 +153,7 @@ include 'menu.php';
                     echo "</tr>";
                     echo "<tr>";
                     echo "<th>Data nadania</th>";
-                    echo "<td><input type='text' class='form-control' name='data_nadania' id='datepicker'></td>";
+                    echo "<td><input type='text' class='form-control' name='data_nadania' id='datepicker' value='2016-10-03'></td>";
                     echo "</tr>";
                     echo "<tr>";
                     echo "<th>Data ustania</th>";
@@ -158,12 +172,12 @@ include 'menu.php';
                     echo "<td><select name='typ_osoby' class='form-control'>";
                                 if($nrID=='1')
                                 {
-                                    echo"<option value='2' selected>Cywil</option>
+                                    echo"<option value='2' selected>Pracownik</option>
                                     <option value='3'>Praktykant, stażysta</option>";
                                 }
                                 elseif ($nrID=='2')
                                 {
-                                    echo "<option value='2'>Cywil</option>
+                                    echo "<option value='2'>Pracownik</option>
                                     <option value='3' selected>Praktykant, stażysta</option>";
                                 }
 
@@ -183,7 +197,7 @@ include 'menu.php';
                     echo "</tr>";
                     echo "<tr>";
                     echo "<th>Data nadania</th>";
-                    echo "<td><input type='text' class='form-control' name='data_nadania' id='datepicker'></td>";
+                    echo "<td><input type='text' class='form-control' name='data_nadania' id='datepicker' value='2016-10-03'></td>";
                     echo "</tr>";
                     echo "<tr>";
                     echo "<th>Data ustania</th>";
@@ -204,8 +218,8 @@ include 'menu.php';
                     {
                         $wniosek_typ_osoby=$_POST['typ_osoby'];
                         $wniosek_nr_kadrowy=$_POST['nr_kadrowy'];
-                        $wniosek_imie = $_POST['imie'];
-                        $wniosek_nazwisko = $_POST['nazwisko'];
+                        $wniosek_imie = ucwords($_POST['imie']);
+                        $wniosek_nazwisko = mb_convert_case($_POST['nazwisko'], MB_CASE_UPPER, "UTF-8");
                         $wniosek_imie_nazwisko = $wniosek_nazwisko." ".$wniosek_imie;
                         $wniosek_data_nadania = $_POST['data_nadania'];
                         $wniosek_data_ustania = $_POST['data_ustania'];
@@ -242,15 +256,24 @@ include 'menu.php';
                         {
                             while ($wpis=mysqli_fetch_array($pobierz_wpis))
                             {
-                                $nazwa_grupy_wnioske = PobierzNazweGrupy($wpis['typ_wniosku']);
+                                $nazwa_grupy_wnioske ='';
                                 echo"<table class='table table-striped table-bordered'><form method='post' action='upowaznienia.php?a=aktualizuj_wniosek'>";
                                 echo "<tr><th>Nr upowaznienia: </th><td><input type='text' value='$wpis[nr_upowaznienia]'  class='form-control' disabled></td></tr>";
                                 echo "<tr>";
                                 echo "<th>Typ Osoby:</th>";
                                 echo "<td><select name='typ_osoby' class='form-control'>";
+                                if($wpis['typ_wniosku']=='1'){
+                                    $nazwa_grupy_wnioske ='Funkcjonariusz';
+                                }
+                                elseif($wpis['typ_wniosku']=='2'){
+                                    $nazwa_grupy_wnioske ='Pracownik';
+                                }
+                                elseif($wpis['typ_wniosku']=='3'){
+                                    $nazwa_grupy_wnioske ='Praktykant, stażysta';
+                                }
                                 echo "<option value='$wpis[typ_wniosku]'>$nazwa_grupy_wnioske</option>";
-                                echo"<option value='1'>Policjant</option>
-                                    <option value='2'>Cywil</option>
+                                echo"<option value='1'>Funkcjonariusz</option>
+                                    <option value='2'>Pracownik</option>
                                     <option value='3'>Praktykant, stażysta</option>
                                     </select>
                                     </td>";
@@ -260,7 +283,7 @@ include 'menu.php';
                                 echo "<td><input type='text' class='form-control' name='nr_kadrowy' value='$wpis[nr_kadrowy]'></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<th>Imię i Nazwisko</th>";
+                                echo "<th>Nazwisko i Imię</th>";
                                 echo "<td><input type='text' class='form-control' name='imie_nazwisko' value='$wpis[imie_nazwisko]'></td>";
                                 echo "</tr>";
                                 echo "<tr>";
@@ -315,12 +338,12 @@ include 'menu.php';
                     }
                     elseif ($uzytkownik_grupa=='2')
                     {
-                        $wyswietl_ewidencje=mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, nr_upowaznienia, data_nadania, data_ustania FROM ewidencja_upowaznienia WHERE typ_wniosku= '1' ORDER BY data_nadania DESC");
+                        $wyswietl_ewidencje=mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, nr_upowaznienia, data_nadania, data_ustania, id FROM ewidencja_upowaznienia WHERE typ_wniosku= '1' ORDER BY data_nadania DESC");
 
                     }
                     elseif ($uzytkownik_grupa=='3')
                     {
-                        $wyswietl_ewidencje=mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, nr_upowaznienia, data_nadania, data_ustania FROM ewidencja_upowaznienia WHERE typ_wniosku ='2' OR typ_wniosku ='3' ORDER BY data_nadania DESC");
+                        $wyswietl_ewidencje=mysqli_query($polaczenie,"SELECT nr_kadrowy, imie_nazwisko, nr_upowaznienia, data_nadania, data_ustania, id FROM ewidencja_upowaznienia WHERE typ_wniosku ='2' OR typ_wniosku ='3' ORDER BY data_nadania DESC");
 
                     }
                     else
@@ -329,7 +352,7 @@ include 'menu.php';
                     }
                     $data_dzis=date("Y-m-d");
                     echo "<table class='table table-striped table-bordered' id='example1'>";
-                    echo "<thead><tr><th>Nr Kadrowy</th><th>Imię i Nazwisko</th><th>Nr upowaznienia</th><th>Data nadania</th><th>Data ustania</th>";
+                    echo "<thead><tr><th>Nr Kadrowy</th><th>Nazwisko i Imię</th><th>Nr upowaznienia</th><th>Data nadania</th><th>Data ustania</th>";
                     if($uzytkownik_grupa=='1')
                     {
                         echo "<th>Data Szkolenia</th>";

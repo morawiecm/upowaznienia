@@ -41,15 +41,15 @@
             elseif($uzytkownik_grupa=='2') {
 
                 echo '<li class="header">UPOWAŻNIENIA</li>
-            <li><a href="upowaznienia.php?a=rejestracja"><i class="fa fa-circle-o"></i>Nowy wniosek Policjanci</a></li>
+            <li><a href="upowaznienia.php?a=rejestracja"><i class="fa fa-circle-o"></i>Funkcjonariusze</a></li>
            
             <li><a href="upowaznienia.php"><i class="fa fa-circle-o"></i> Przegląd</a></li>';
             }
             elseif($uzytkownik_grupa=='3')
             {
                 echo'<li class="header">UPOWAŻNIENIA</li>
-            <li><a href="upowaznienia.php?a=rejestracja"><i class="fa fa-circle-o"></i>Nowy wniosek Cywile</a></li>
-            <li><a href="upowaznienia.php?a=rejestracja"><i class="fa fa-circle-o"></i>Nowy wniosek Praktykanci staż.</a></li>
+             <li><a href="upowaznienia.php?a=rejestracja&id=1"><i class="fa fa-circle-o"></i>Pracownicy</a></li>
+            <li><a href="upowaznienia.php?a=rejestracja&id=2"><i class="fa fa-circle-o"></i>Praktyka, staż, itp.</a></li>
             <li><a href="upowaznienia.php"><i class="fa fa-circle-o"></i> Przegląd</a></li>';
             }
             ?>
