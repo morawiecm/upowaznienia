@@ -7,9 +7,10 @@ Poprawki:
 
 **1.03**
 ---------------------------------------
-- Poprawka przy kodowaniu znaków zmiana funkcji na mb_convert_case z uzyciem UTF-8
+- Poprawka przy kodowaniu znaków, zmiana funkcji na mb_convert_case z uzyciem UTF-8
 - Dodano informacje o nr wersji oraz informacje o zmianach (stopka)
-- Dodano funkcje genruj¹c¹ wszystkie zestawienia w formacjie PDF (genreuj_wnioski.php), wywo³ywana tylko / adresu
+- Dodano funkcje genruj¹c¹ wszystkie zestawienia w formacjie PDF (generuj_wnioski.php), wywo³ywana tylko / adresu
+- Poprawiono edycjê upowa¿nieñ - u¿ytkownicy grupy 1 mog¹ mieæ tylko ustawiæ datê szkolenia pracownika
 
 **1.02**
 ---------------------------------------

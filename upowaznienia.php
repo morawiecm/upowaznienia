@@ -294,7 +294,16 @@ include 'menu.php';
                                 echo "<th>Data ustania</th>";
                                 echo "<td><input type='text' class='form-control' name='data_ustania' id='datepicker2' value='$wpis[data_ustania]'></td>";
                                 echo "</tr>";
-                                echo "<tr><th>Data szkolenia:</th><td><input type='text' name='data_szkolenia' class='form-control' id='datepicker3' value='$wpis[data_szkolenia]'></td></tr>";
+                                echo "<tr><th>Data szkolenia:</th><td><input type='text' name='data_szkolenia' class='form-control' id='datepicker3' value='$wpis[data_szkolenia]' ";
+                                if($uzytkownik_grupa!='1')
+                                {
+                                    echo " disabled='disabled'>";
+                                }
+                                else
+                                {
+                                    echo ">";
+                                }
+                                echo "</td></tr>";
                                 echo "<tr><th colspan='2'><input type='hidden' name='nr_id' value='$nrID'><input type='submit' value='Aktualizuj upoważnienie' class='btn btn-warning form-control' name='przycisk_aktualizuj_wnioske'></th></tr>";
                                 echo"</form></table>";
                                 if($wpis['kto_edytowal']!='0')
