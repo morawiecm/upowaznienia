@@ -83,13 +83,14 @@
         //Date picker
         $('#datepicker').datepicker({
             autoclose: true,
-            format: 'yyyy-mm-dd'
-
+            format: 'yyyy-mm-dd',
+            todayBtn: true
 
         });
         $('#datepicker2').datepicker({
             autoclose: true,
-            format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd',
+            todayBtn: true
         });
         $('#datepicker3').datepicker({
             autoclose: true,

@@ -11,6 +11,7 @@ Poprawki:
 - Dodano informacje o nr wersji oraz informacje o zmianach (stopka)
 - Dodano funkcje genruj¹c¹ wszystkie zestawienia w formacjie PDF (generuj_wnioski.php), wywo³ywana tylko / adresu
 - Poprawiono edycjê upowa¿nieñ - u¿ytkownicy grupy 1 mog¹ mieæ tylko ustawiæ datê szkolenia pracownika
+- Modyfikacja kalendarza - bootstap - DataPicker funkcja Dziœ i przet³umaczono interface
 
 **1.02**
 ---------------------------------------
