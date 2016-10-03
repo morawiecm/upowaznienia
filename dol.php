@@ -1,8 +1,8 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Wersja</b> 2.0
+        <b>Wersja</b> <?php echo "<a href='README.md'>$nr_wersji_programu</a>"; ?>
     </div>
-    <strong>Oprogramowanie stworzył:<a href="#">Mariusz Morawiec</a>.</strong> tel 79 11614
+    <strong>Oprogramowanie stworzył:<a href="mailto:mariusz@morawiec.org">Mariusz Morawiec</a>.</strong> tel 79 11614
 </footer>
 
 <!-- Control Sidebar -->

@@ -6,10 +6,10 @@ define('DBUSER', 'root');
 define('DBPASS', 'em');
 define('DBNAME', 'upowaznienia');
 //Polaczenie MySQLi
-error_reporting(2);
+//error_reporting(2);
 $polaczenie=mysqli_connect(DBHOST,DBUSER,DBPASS,DBNAME) or die('Blad czy polaczniu'.mysqli_connect_error());
 mysqli_set_charset($polaczenie, "utf8");
-
+$nr_wersji_programu = PobierzNrWersjiAplikacji();
 $a='';
 if(isset($_REQUEST['a']))
 {
@@ -20,7 +20,21 @@ if (isset($_REQUEST['id']))
     $nrID=trim($_REQUEST['id']);
 }
 
-
+function PobierzNrWersjiAplikacji()
+{
+    $nr_wersji='1.0';
+    $polaczenie = polaczenie_z_baza();
+    $pobierz_nr_wersji = mysqli_query($polaczenie,"SELECT tresc FROM ustawienia WHERE id = '3'")
+    or  die("Bład przy pobierz_nr_wersji ".mysqli_error($polaczenie) );
+    if (mysqli_num_rows($pobierz_nr_wersji)>0)
+    {
+        while ($wersja=mysqli_fetch_array($pobierz_nr_wersji))
+        {
+            $nr_wersji = $wersja['tresc'];
+        }
+    }
+    return $nr_wersji;
+}
 // funkcja na sprawdzanie czy user jest zalogowany, jeśli nie to wyświetlamy komunikat
 
 // startujemy sesje
@@ -32,6 +46,7 @@ function polaczenie_z_baza()
 
     return $polaczenie;
 }
+
 
 session_start();
 function clear($text) {

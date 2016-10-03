@@ -31,8 +31,7 @@ else
 
 
 ?>
-<?php include 'gora.php';?>
-<?php
+<?php include 'gora.php';
 include 'pasek.php';
 include 'menu.php';
 ?>

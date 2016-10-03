@@ -218,7 +218,7 @@ include 'menu.php';
                     {
                         $wniosek_typ_osoby=$_POST['typ_osoby'];
                         $wniosek_nr_kadrowy=$_POST['nr_kadrowy'];
-                        $wniosek_imie = ucwords($_POST['imie']);
+                        $wniosek_imie = mb_convert_case($_POST['imie'],MB_CASE_TITLE,"UTF-8");
                         $wniosek_nazwisko = mb_convert_case($_POST['nazwisko'], MB_CASE_UPPER, "UTF-8");
                         $wniosek_imie_nazwisko = $wniosek_nazwisko." ".$wniosek_imie;
                         $wniosek_data_nadania = $_POST['data_nadania'];

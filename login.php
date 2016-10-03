@@ -96,7 +96,7 @@ if(!$_SESSION['logged']) {
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="login.php"><b>Upoważnienia</b>1.0</a>
+        <a href="login.php"><b>Upoważnienia</b><?php echo $nr_wersji_programu; ?></a>
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Zaloguj się by rozpocząć pracę</p>
