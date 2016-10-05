@@ -36,7 +36,8 @@
 
                 echo '<li class="header">ADMINISTRACJA</li>
             <li><a href="uzytkownicy.php"><i class="fa fa-circle-o text-red"></i> <span>Użytkownicy</span></a></li>
-            <li><a href="uzytkownicy_grupa.php"><i class="fa fa-circle-o text-yellow"></i> <span>Użytkownicy Grupy</span></a></li>';
+            <li><a href="uzytkownicy_grupa.php"><i class="fa fa-circle-o text-yellow"></i> <span>Użytkownicy Grupy</span></a></li>
+            <li><a href="kopia_zapasowa.php"><i class="fa fa-circle-o text-green"></i> <span>Kopia Zapasowa</span></a></li>';
             }
             elseif($uzytkownik_grupa=='2') {
 

@@ -5,6 +5,12 @@ System do wystawiania upowa¿nieñ do przetwa¿ania danych osobowych.
 Poprawki:
 ---------------------------------------
 
+**1.04**
+---------------------------------------
+- Poprawka stopki informacja o wersji ( z dnia)
+- Utworzenie systemu kopii zapasowych
+
+
 **1.03**
 ---------------------------------------
 - Poprawka przy kodowaniu znaków, zmiana funkcji na mb_convert_case z uzyciem UTF-8

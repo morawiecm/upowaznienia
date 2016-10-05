@@ -10,6 +10,7 @@ error_reporting(2);
 $polaczenie=mysqli_connect(DBHOST,DBUSER,DBPASS,DBNAME) or die('Blad czy polaczniu'.mysqli_connect_error());
 mysqli_set_charset($polaczenie, "utf8");
 $nr_wersji_programu = PobierzNrWersjiAplikacji();
+$data_wersji_programu = PobierzDateAplikacji();
 $a='';
 if(isset($_REQUEST['a']))
 {
@@ -34,6 +35,22 @@ function PobierzNrWersjiAplikacji()
         }
     }
     return $nr_wersji;
+}
+
+function PobierzDateAplikacji()
+{
+    $data_wersji='2016-10-01';
+    $polaczenie = polaczenie_z_baza();
+    $pobierz_date_wersji = mysqli_query($polaczenie,"SELECT tresc FROM ustawienia WHERE id = '1'")
+    or  die("Bład przy pobierz_nr_wersji ".mysqli_error($polaczenie) );
+    if (mysqli_num_rows($pobierz_date_wersji)>0)
+    {
+        while ($wersja=mysqli_fetch_array($pobierz_date_wersji))
+        {
+            $data_wersji = $wersja['tresc'];
+        }
+    }
+    return $data_wersji;
 }
 // funkcja na sprawdzanie czy user jest zalogowany, jeśli nie to wyświetlamy komunikat
 
