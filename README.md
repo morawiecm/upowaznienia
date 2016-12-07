@@ -5,6 +5,10 @@ System do wystawiania upowa¿nieñ do przetwa¿ania danych osobowych.
 Poprawki:
 ---------------------------------------
 
+**1.05**
+- Dodano date szkolenia do exportowanego pliku
+- Poprawiono b³¹d z data szkolenia przy aktualizacji u¿ytkownika
+
 **1.04**
 ---------------------------------------
 - Poprawka stopki informacja o wersji ( z dnia)

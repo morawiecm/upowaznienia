@@ -28,3 +28,10 @@ function ZwiekszNrWniosku($nr_wniosku)
     $zwiekszNrWniosku=mysqli_query($polacznie,"UPDATE ustawienia SET tresc = '$nr_wniosku' WHERE id = '2'")
         or die("Bład przy zwiekszNrWniosku: ".mysqli_error($polacznie));
 }
+
+function UstawDatePoczatkowa($id_rekordu)
+{
+    $polaczenie = polaczenie_z_baza();
+    $ustaw = mysqli_query($polaczenie,"UPDATE ewidencja_upowaznienia SET data_szkolenia ='0000-00-00' WHERE id='$id_rekordu'")
+    or die("Blad przy ustaw: ".mysqli_error($polaczenie));
+}

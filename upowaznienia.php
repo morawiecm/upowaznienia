@@ -305,6 +305,11 @@ include 'menu.php';
                                 }
                                 echo "</td></tr>";
                                 echo "<tr><th colspan='2'><input type='hidden' name='nr_id' value='$nrID'><input type='submit' value='Aktualizuj upoważnienie' class='btn btn-warning form-control' name='przycisk_aktualizuj_wnioske'></th></tr>";
+                                if($uzytkownik_grupa=='1')
+                                {
+                                    echo "<tr><th colspan='2'><a href='upowaznienia.php?a=wyczysc&id=$nrID' class='btn bg-fuchsia form-control'>Usun date szkolenia</a> </th></tr>";
+
+                                }
                                 echo"</form></table>";
                                 if($wpis['kto_edytowal']!='0')
                                 {
@@ -316,22 +321,41 @@ include 'menu.php';
 
                     }
                 }
+                elseif ($a=='wyczysc')
+                {
+                    UstawDatePoczatkowa($nrID);
+                    echo "<p>Ustawiono nowa datę <a href='upowaznienia.php'>Powrót</a> </p>";
+                }
                 elseif ($a=='aktualizuj_wniosek')
                 {
                     if(isset($_POST['przycisk_aktualizuj_wnioske']))
                     {
+                        $zapytanie = "";
                         $upo_typ = $_POST['typ_osoby'];
                         $upo_nr_kadrowy = trim($_POST['nr_kadrowy']);
                         $upo_imie_nazwisko = trim($_POST['imie_nazwisko']);
                         $upo_data_nadania = $_POST['data_nadania'];
                         $upo_data_ustania = $_POST['data_ustania'];
-                        $upo_data_szkolenia = $_POST['data_szkolenia'];
                         $upo_nr_id_rek = $_POST['nr_id'];
                         $upo_data_edycji = date("Y-m-d H:i:s");
+                        $upo_data_szkolenia = $_POST['data_szkolenia'];
+                        $upo_data_szkolenia = strtotime($upo_data_szkolenia);
+                        $upo_data_szkolenia = date("Y-m-d",$upo_data_szkolenia);
 
-                        $aktualizujUpowaznienie = mysqli_query($polaczenie,"UPDATE ewidencja_upowaznienia SET typ_wniosku = '$upo_typ', 
-                        nr_kadrowy ='$upo_nr_kadrowy', imie_nazwisko = '$upo_imie_nazwisko', data_nadania = '$upo_data_nadania', data_ustania = '$upo_data_ustania', 
-                        data_szkolenia = '$upo_data_szkolenia', kto_edytowal = '$uzytkownik_id', data_edycji = '$upo_data_edycji' WHERE id = '$upo_nr_id_rek'")
+                        if($upo_data_szkolenia!='' && $upo_data_szkolenia > '2000-00-00')
+                        {
+                            $zapytanie = "UPDATE ewidencja_upowaznienia SET typ_wniosku = '$upo_typ',nr_kadrowy ='$upo_nr_kadrowy', imie_nazwisko = '$upo_imie_nazwisko', data_nadania = '$upo_data_nadania', data_ustania = '$upo_data_ustania', 
+                        data_szkolenia = '$upo_data_szkolenia', kto_edytowal = '$uzytkownik_id', data_edycji = '$upo_data_edycji' WHERE id = '$upo_nr_id_rek'";
+
+                        }
+                        else
+                        {
+                        $zapytanie = "UPDATE ewidencja_upowaznienia SET typ_wniosku = '$upo_typ',nr_kadrowy ='$upo_nr_kadrowy', imie_nazwisko = '$upo_imie_nazwisko', data_nadania = '$upo_data_nadania', data_ustania = '$upo_data_ustania', 
+                         kto_edytowal = '$uzytkownik_id', data_edycji = '$upo_data_edycji' WHERE id = '$upo_nr_id_rek'";
+
+                        }
+
+                        $aktualizujUpowaznienie = mysqli_query($polaczenie,$zapytanie)
                             or die("Blad przy aktualizujUpowaznienie: ".mysqli_error($polaczenie));
                         echo "<p>Zaktualizowano pomyslnie upoważnienie <a href='upowaznienia.php'>Powrót</a></p>";
                     }

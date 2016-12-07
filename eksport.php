@@ -24,25 +24,25 @@ echo "<tr></tr>";
 echo "<thead><tr><th colspan='6'>EWIDENCJA</th></tr>";
 echo "<tr><th colspan='6'>osób upoważnionych do przetwarzania danych osobowych</th></tr>";
 echo "<tr><th colspan='6'>w Komendzie Wojewódzkiej Policji w Gorzowie Wlkp.</th></tr>";
-echo "<tr><th>Nr ID kadrowy*</th><th>Nazwisko i imię</th><th>Nr upoważnienia</th><th>zakres ** upoważnienia</th><th>Data nadania</th><th>Data ustania</th></tr></thead>";
+echo "<tr><th>Nr ID kadrowy*</th><th>Nazwisko i imię</th><th>Nr upoważnienia</th><th>zakres ** upoważnienia</th><th>Data nadania</th><th>Data ustania</th><th>Data szkolenia</th></tr></thead>";
 if($uzytkownik_grupa =='1')
 {
-    $pobierzDaneDoZestawienia=mysqli_query($polaczenie," SELECT nr_kadrowy,imie_nazwisko,nr_upowaznienia,data_nadania,data_ustania FROM ewidencja_upowaznienia");
+    $pobierzDaneDoZestawienia=mysqli_query($polaczenie," SELECT nr_kadrowy,imie_nazwisko,nr_upowaznienia,data_nadania,data_ustania,data_szkolenia FROM ewidencja_upowaznienia");
 }
 elseif ($uzytkownik_grupa =='2')
 {
-    $pobierzDaneDoZestawienia=mysqli_query($polaczenie," SELECT nr_kadrowy,imie_nazwisko,nr_upowaznienia,data_nadania,data_ustania FROM ewidencja_upowaznienia WHERE typ_wniosku = '1'");
+    $pobierzDaneDoZestawienia=mysqli_query($polaczenie," SELECT nr_kadrowy,imie_nazwisko,nr_upowaznienia,data_nadania,data_ustania,data_szkolenia FROM ewidencja_upowaznienia WHERE typ_wniosku = '1'");
 }
 elseif ($uzytkownik_grupa =='3')
 {
-    $pobierzDaneDoZestawienia=mysqli_query($polaczenie," SELECT nr_kadrowy,imie_nazwisko,nr_upowaznienia,data_nadania,data_ustania FROM ewidencja_upowaznienia WHERE  typ_wniosku = '2' OR typ_wniosku = '3'");
+    $pobierzDaneDoZestawienia=mysqli_query($polaczenie," SELECT nr_kadrowy,imie_nazwisko,nr_upowaznienia,data_nadania,data_ustania,data_szkolenia FROM ewidencja_upowaznienia WHERE  typ_wniosku = '2' OR typ_wniosku = '3'");
 }
 if(mysqli_num_rows($pobierzDaneDoZestawienia)>0)
 {
     while ($odwiedziny=mysqli_fetch_array($pobierzDaneDoZestawienia))
     {
         echo "<tr><td>$odwiedziny[nr_kadrowy]</td><td>$odwiedziny[imie_nazwisko]</td><td>$odwiedziny[nr_upowaznienia]</td><td></td>
-        <td>$odwiedziny[data_nadania]</td><td>$odwiedziny[data_ustania]</td></tr>";
+        <td>$odwiedziny[data_nadania]</td><td>$odwiedziny[data_ustania]</td><td>$odwiedziny[data_szkolenia]</td></tr>";
     }
 }
 echo"<tr></tr>";
